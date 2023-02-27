@@ -22,13 +22,11 @@ def get_db_conn(request: Request):
 async def memo_create(
     req: MemoCreate, db: Database = Depends(get_db_conn)  # 요청을 정의한 create 스키마에 맞게 전달 받음
 ):
-    query = memo.insert()  # insert 쿼리 생성 (feat.sqlalchemy)
-
-    # validation 처리가 필요할 듯
-    values = {**req}
     try:
-        await db.execute(query, values)  # 쿼리 실행 (feat.databases)
+        await db.execute(
+            memo.insert().values(regdate=req.regdate, title=req.title, body=req.body)
+        )  # 쿼리 실행 (feat.databases)
     except Exception as err:
         print(err)
 
-    return {**req.dict}
+    return {**req.dict()}
