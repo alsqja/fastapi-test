@@ -8,6 +8,11 @@ packages = [{include = "fastapi_test"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+fastapi = "^0.92.0"
+python-dotenv = "^1.0.0"
+mysqlclient = "^2.1.1"
+databases = {extras = ["mysql"], version = "^0.7.0"}
 
 
 [build-system]
